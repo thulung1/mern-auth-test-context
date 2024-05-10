@@ -54,7 +54,9 @@ const logoutUser = async (req, res) => {
 };
 
 const profile = (req, res) => {
-  const token = req.cookies.token;
+  // const token = req.cookies.token;
+  const token = req.headers.cookie.split('=')[1]
+  console.log(token)
 
   if(!token){
     return res.status(411).json("Token not found")
