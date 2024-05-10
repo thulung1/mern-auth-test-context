@@ -30,7 +30,7 @@ const signinUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    return res.cookie("token", token, { maxAge: 3600000 }).status(200).json({
+    return res.cookie("token", token, { maxAge: 360000 }).status(200).json({
       message: "User successfully logged in",
       token: token,
     });
