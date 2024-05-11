@@ -30,7 +30,8 @@ const signinUser = async (req, res) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1h",
     });
-    return res.cookie("token", token, { maxAge: 360000 }).status(200).json({
+    const expiryDate = new Date(Date.now() + 3600000)
+    return res.cookie("token", token, { hhtpOnly: true, expires: expiryDate }).status(200).json({
       message: "User successfully logged in",
       token: token,
     });
@@ -54,9 +55,7 @@ const logoutUser = async (req, res) => {
 };
 
 const profile = (req, res) => {
-  // const token = req.cookies.token;
-  const token = req.headers.cookie.split('=')[1]
-  console.log(token)
+  const token = req.cookies.token;
 
   if(!token){
     return res.status(411).json("Token not found")
