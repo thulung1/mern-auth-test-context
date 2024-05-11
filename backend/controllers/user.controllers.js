@@ -55,13 +55,16 @@ const logoutUser = async (req, res) => {
 };
 
 const profile = (req, res) => {
-  const token = req.cookies.token;
+  // const token = req.cookies.token;
+  const token = req.headers.cookie
+  const newToken = token.split("=")[1]
+  console.log(newToken)
 
-  if(!token){
+  if(!newToken){
     return res.status(411).json("Token not found")
   }
 
-  jwt.verify(token, process.env.JWT_SECRET, (err, data) => {
+  jwt.verify(newToken, process.env.JWT_SECRET, (err, data) => {
     if (err) {
       return res.status(401).json({
         err,
