@@ -52,7 +52,8 @@ const logoutUser = async (req, res) => {
 
 const profile = (req, res) => {
   const token = req.headers.authorization;
-  console.log(token)
+  console.log("Token is ", token)
+  console.log("Req headers ", req.headers)
 
   if (!token) {
     return res.status(411).json("Token not found");
