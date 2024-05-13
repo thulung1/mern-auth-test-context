@@ -13,7 +13,11 @@ export function UserContextProvider({ children }) {
 
   const getUser = async () => {
     try {
+      const token = localStorage.getItem("token");
       const res = await axios.get(`${BASE_URL}/api/v1/users/profile`, {
+        headers: {
+          Authorization: `${token}`,
+        },
         withCredentials: true,
       });
       setUser(res.data);

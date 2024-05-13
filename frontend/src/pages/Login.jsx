@@ -20,7 +20,9 @@ function Login() {
           email,
           password,
         },
-        { withCredentials: true }
+        {
+          withCredentials: true,
+        }
       );
       if (res.data) {
         navigate("/");
