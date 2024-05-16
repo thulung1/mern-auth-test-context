@@ -16,9 +16,9 @@ export function UserContextProvider({ children }) {
       const token = localStorage.getItem("token");
       const res = await axios.get(`${BASE_URL}/api/v1/users/profile`, {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `${token}`,
-        },
-        withCredentials: true,
+        }
       });
       setUser(res.data);
     } catch (error) {
